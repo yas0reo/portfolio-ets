@@ -1,0 +1,1325 @@
+/*
+  Page d'accueil.
+  Les classes qui commencent par hero__, apropos__ ou projets__ sont des parties
+  d'une même section. Les règles en bas du fichier adaptent le site au mobile.
+*/
+main {
+  max-width: 1440px;
+  margin: auto;
+}
+
+.hero {
+  margin: 0 3.5% 120px;
+}
+
+.hero__illustration {
+  position: relative;
+  min-height: clamp(460px, 57vw, 760px);
+}
+
+.hero__personnage {
+  position: absolute;
+  width: clamp(150px, 28vw, 400px);
+  height: auto;
+  object-fit: contain;
+}
+
+/* Animation des dessins qui entrent du côté où ils sont placés. */
+.hero--anime .hero__personnage {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    opacity 5s ease,
+    transform 5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero--anime .hero__personnage--haut-gauche,
+.hero--anime .hero__personnage--bas-gauche {
+  transform: translateX(-120px);
+}
+
+.hero--anime .hero__personnage--haut-droite,
+.hero--anime .hero__personnage--bas-droite {
+  transform: translateX(120px);
+}
+
+.hero--anime.is-visible .hero__personnage {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.hero--anime .hero__personnage--haut-gauche {
+  transition-delay: 0.6s;
+}
+.hero--anime .hero__personnage--haut-droite {
+  transition-delay: 1s;
+}
+.hero--anime .hero__personnage--bas-gauche {
+  transition-delay: 1.4s;
+}
+.hero--anime .hero__personnage--bas-droite {
+  transition-delay: 1.8s;
+}
+
+.hero__personnage--haut-gauche {
+  top: 18%;
+  left: 18%;
+  width: clamp(130px, 20vw, 285px);
+}
+
+.hero__personnage--haut-droite {
+  top: 2%;
+  right: 2%;
+}
+
+.hero__personnage--bas-gauche {
+  bottom: 2%;
+  left: 1%;
+}
+
+.hero__personnage--bas-droite {
+  right: 1%;
+  bottom: 2%;
+}
+
+.hero__texte {
+  position: absolute;
+  top: 43%;
+  right: 4%;
+  width: min(58%, 760px);
+  margin: 0;
+  font:
+    clamp(52px, 7vw, 110px) / 0.95 "Just Another Hand",
+    cursive;
+  text-align: center;
+}
+
+.hero--anime .hero__texte {
+  opacity: 0;
+  transform: translateX(120px);
+  will-change: transform, opacity;
+  transition:
+    opacity 5s ease,
+    transform 5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero--anime.is-visible .hero__texte {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Ces sections apparaissent doucement lorsqu'elles entrent dans l'écran. */
+.accueil-section--anime {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 1s ease,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.accueil-section--anime.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* À propos */
+.apropos {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  margin: 0 0 110px 3.5%;
+  align-items: start;
+}
+
+.apropos__image img {
+  width: 100%;
+  height: 660px;
+  object-fit: cover;
+}
+
+.apropos__contenu {
+  margin-top: 55px;
+  margin-left: -80px;
+  position: relative;
+}
+
+.apropos__header {
+  /* Le gris reste seulement derrière le titre et le nom. */
+  background: var(--gris-collage);
+  padding: 24px 28px 12px;
+}
+
+.apropos__header h2 {
+  font-family: "Just Another Hand", cursive;
+  text-transform: uppercase;
+  text-align: right;
+  font-size: clamp(24px, 3.7vw, 49px);
+  font-weight: 400;
+  margin: 0 0 22px;
+}
+
+.apropos__header h1 {
+  font:
+    48px/1 "Just Another Hand",
+    cursive;
+  margin: 0;
+}
+
+.apropos__texte {
+  padding: 24px 6% 0 110px;
+  text-align: left;
+}
+
+.apropos__details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 26px;
+}
+
+.apropos h3 {
+  font:
+    30px "Just Another Hand",
+    cursive;
+  margin-bottom: 12px;
+}
+
+.apropos__details a {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+/* Dans « À propos », chaque partie arrive après la précédente. */
+.apropos.accueil-section--anime {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.apropos.accueil-section--anime .apropos__image,
+.apropos.accueil-section--anime .apropos__header,
+.apropos.accueil-section--anime .apropos__texte > p,
+.apropos.accueil-section--anime .apropos__details > div {
+  opacity: 0;
+  transition:
+    opacity 1.4s ease,
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.apropos.accueil-section--anime .apropos__image {
+  transform: translateX(-55px);
+}
+
+.apropos.accueil-section--anime .apropos__header,
+.apropos.accueil-section--anime .apropos__texte > p,
+.apropos.accueil-section--anime .apropos__details > div {
+  transform: translateX(45px);
+}
+
+.apropos.accueil-section--anime.is-visible .apropos__image,
+.apropos.accueil-section--anime.is-visible .apropos__header,
+.apropos.accueil-section--anime.is-visible .apropos__texte > p,
+.apropos.accueil-section--anime.is-visible .apropos__details > div {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.apropos.accueil-section--anime .apropos__header {
+  transition-delay: 0.5s;
+}
+
+.apropos.accueil-section--anime .apropos__texte > p {
+  transition-delay: 0.9s;
+}
+
+.apropos.accueil-section--anime .apropos__details > div:first-child {
+  transition-delay: 1.3s;
+}
+
+.apropos.accueil-section--anime .apropos__details > div:last-child {
+  transition-delay: 1.7s;
+}
+
+/* Intérêts et défilement */
+.interets {
+  overflow: hidden;
+  margin-bottom: 140px;
+}
+
+.interets h2 {
+  text-align: right;
+  margin: 0 4% 20px;
+}
+
+/* Deux groupes identiques assurent une boucle sans coupure. */
+.interets__marquee {
+  overflow: hidden;
+  padding-block: 16px;
+}
+
+.interets__ligne {
+  display: flex;
+  width: max-content;
+  animation: interets-defilement 65s linear infinite;
+}
+
+.interets__ligne:nth-child(even) {
+  animation-direction: reverse;
+}
+
+.interets__groupe {
+  display: flex;
+  flex-shrink: 0;
+  align-items: baseline;
+  white-space: nowrap;
+  color: var(--gris-themes);
+  font-size: clamp(21px, 2.8vw, 39px);
+  line-height: 1.35;
+}
+
+.interets__mot {
+  display: inline-block;
+  transition:
+    color 0.2s,
+    text-shadow 0.2s;
+}
+
+.interets__mot::after {
+  content: "·";
+  display: inline-block;
+  margin-inline: 0.25em;
+  color: var(--gris-themes);
+  text-shadow: none;
+  font-family: Liberation, sans-serif;
+  font-size: 0.8em;
+}
+
+.interets__marquee strong {
+  color: #222;
+  font:
+    1.3em/1 "Just Another Hand",
+    cursive;
+  font-weight: 400;
+}
+
+.interets__mot:hover {
+  color: var(--glow);
+  text-shadow:
+    0 0 6px var(--glow),
+    0 0 18px var(--glow);
+}
+
+@keyframes interets-defilement {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Logiciels et survol */
+.skills {
+  margin: 0 4% 135px;
+}
+
+.skills h2 {
+  text-align: center;
+  padding-left: 28%;
+}
+
+.skills__contenu {
+  height: 470px;
+  position: relative;
+}
+
+.skills__illustration {
+  position: absolute;
+  width: 32%;
+  left: 28%;
+  top: 12px;
+}
+
+.skills__illustration img {
+  width: 100%;
+}
+
+.skills__logiciels {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.logiciel {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+/* L'animation est activée que si JavaScript est dispo. */
+.skills--anime .logiciel {
+  opacity: 0;
+  transform: translateY(24px) rotate(-3deg) scale(0.92);
+  will-change: transform, opacity;
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.skills--anime.is-visible .logiciel {
+  opacity: 1;
+  transform: translateY(0) rotate(0) scale(1);
+}
+
+.skills--anime .logiciel:nth-child(1) {
+  transition-delay: 0.05s; /* Figma */
+}
+.skills--anime .logiciel:nth-child(2) {
+  transition-delay: 0.12s; /* Vscode */
+}
+.skills--anime .logiciel:nth-child(3) {
+  transition-delay: 0.19s; /* Unity */
+}
+.skills--anime .logiciel:nth-child(4) {
+  transition-delay: 0.26s; /* Photoshop */
+}
+.skills--anime .logiciel:nth-child(5) {
+  transition-delay: 0.33s; /* After Effects */
+}
+.skills--anime .logiciel:nth-child(6) {
+  transition-delay: 0.4s; /* DaVinci */
+}
+.skills--anime .logiciel:nth-child(7) {
+  transition-delay: 0.47s; /* Lightroom */
+}
+.skills--anime .logiciel:nth-child(8) {
+  transition-delay: 0.54s; /* Premiere Pro */
+}
+
+.logiciel__icone {
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  will-change: transform;
+  transition: transform 0.22s ease;
+}
+
+/* Après arrivée, icône continue à flotter . */
+.skills--anime.is-visible .logiciel__icone {
+  animation: icone-flottante 2.2s ease-in-out infinite alternate;
+}
+
+.skills--anime.is-visible .logiciel:nth-child(2) .logiciel__icone {
+  animation-delay: -0.35s;
+}
+.skills--anime.is-visible .logiciel:nth-child(3) .logiciel__icone {
+  animation-delay: -0.7s;
+}
+.skills--anime.is-visible .logiciel:nth-child(4) .logiciel__icone {
+  animation-delay: -1.05s;
+}
+.skills--anime.is-visible .logiciel:nth-child(5) .logiciel__icone {
+  animation-delay: -1.4s;
+}
+.skills--anime.is-visible .logiciel:nth-child(6) .logiciel__icone {
+  animation-delay: -1.75s;
+}
+.skills--anime.is-visible .logiciel:nth-child(7) .logiciel__icone {
+  animation-delay: -2.1s;
+}
+.skills--anime.is-visible .logiciel:nth-child(8) .logiciel__icone {
+  animation-delay: -2.45s;
+}
+
+@keyframes icone-flottante {
+  from {
+    transform: translateY(-14px) rotate(-12deg);
+  }
+  to {
+    transform: translateY(14px) rotate(12deg);
+  }
+}
+
+.logiciel__nom {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 12px);
+  left: 50%;
+  width: max-content;
+  max-width: 125px;
+  text-align: center;
+  line-height: 1.3;
+  color: var(--couleur-texte);
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  pointer-events: none;
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease;
+}
+/* animation lorsque hover */
+.logiciel:is(:hover, :focus),
+.logiciel.est-actif {
+  z-index: 5;
+}
+.logiciel:is(:hover, :focus) .logiciel__icone,
+.logiciel.est-actif .logiciel__icone {
+  transform: scale(1.15);
+  animation-play-state: paused;
+}
+
+.logiciel:is(:hover, :focus) .logiciel__nom,
+.logiciel.est-actif .logiciel__nom {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.logiciel:focus-visible {
+  outline: 2px solid var(--couleur-texte);
+  outline-offset: 9px;
+  border-radius: 10px;
+}
+/* Garder les étiquettes aux extrémités dans la page. */
+.logiciel:nth-child(2) .logiciel__nom,
+.logiciel:nth-child(3) .logiciel__nom {
+  left: 0;
+  transform: translateY(4px);
+}
+
+.logiciel:nth-child(4) .logiciel__nom,
+.logiciel:nth-child(8) .logiciel__nom {
+  left: auto;
+  right: 0;
+  transform: translateY(4px);
+}
+
+.logiciel:nth-child(2):is(:hover, :focus) .logiciel__nom,
+.logiciel:nth-child(3):is(:hover, :focus) .logiciel__nom,
+.logiciel:nth-child(4):is(:hover, :focus) .logiciel__nom,
+.logiciel:nth-child(8):is(:hover, :focus) .logiciel__nom,
+.logiciel:nth-child(2).est-actif .logiciel__nom,
+.logiciel:nth-child(3).est-actif .logiciel__nom,
+.logiciel:nth-child(4).est-actif .logiciel__nom,
+.logiciel:nth-child(8).est-actif .logiciel__nom {
+  transform: translateY(0);
+}
+
+/* Un toucher remplace le survol sur iPad et iPhone. */
+@media (hover: none), (pointer: coarse) {
+  .logiciel {
+    touch-action: manipulation;
+  }
+}
+
+.logiciel:nth-child(1) {
+  left: 20%;
+  top: 0;
+}
+
+.logiciel:nth-child(2) {
+  left: 3%;
+  top: 135px;
+}
+
+.logiciel:nth-child(3) {
+  left: 0;
+  top: 325px;
+}
+
+.logiciel:nth-child(4) {
+  right: 0;
+  top: -50px;
+}
+
+.logiciel:nth-child(5) {
+  right: 26%;
+  top: 85px;
+}
+
+.logiciel:nth-child(6) {
+  right: 8%;
+  top: 195px;
+}
+
+.logiciel:nth-child(7) {
+  right: 27%;
+  top: 335px;
+}
+
+.logiciel:nth-child(8) {
+  right: 0;
+  top: 385px;
+}
+
+/* Projets */
+.projets {
+  margin-bottom: 130px;
+}
+
+.projets__header {
+  margin-left: 18%;
+  background: var(--gris-projets);
+  height: 225px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.projets__header h2 {
+  margin: 0;
+  padding-left: 12%;
+}
+
+.projets__header p {
+  position: absolute;
+  left: -22%;
+  bottom: -75px;
+  background: var(--gris-clair);
+  padding: 35px 7%;
+  width: 48%;
+  text-align: center;
+  font:
+    38px/1 "Just Another Hand",
+    cursive;
+  margin: 0;
+}
+
+.projets__composition {
+  position: relative;
+  margin: 140px 4% 0;
+  height: 780px;
+}
+
+/* La liste de cartes est invisible par défaut, donc elle ne change pas le desktop. */
+.projets__liste-mobile {
+  display: none;
+}
+
+.projets__apercu {
+  position: absolute;
+  background: var(--gris-collage);
+  left: 34%;
+  top: 0;
+  width: 32%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.projets__apercu-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.projets__apercu-image.is-visible {
+  opacity: 1;
+}
+
+.projets__apercu-texte {
+  position: absolute;
+  inset: clamp(16px, 2vw, 28px) 12px auto;
+  margin: 0;
+  color: var(--couleur-fond);
+  font:
+    32px / 1 "Just Another Hand",
+    cursive;
+  text-align: center;
+  transition: opacity 0.25s ease;
+}
+
+.projets__apercu-texte.is-hidden {
+  opacity: 0;
+}
+
+.projets__fil {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.projets__liste {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  column-gap: 35%;
+  align-items: center;
+}
+
+.projets__message {
+  grid-column: 1 / -1;
+  margin: 0;
+  font:
+    36px / 1 "Just Another Hand",
+    cursive;
+  text-align: center;
+}
+
+/* Dernière place de la composition : un projet arrivera plus tard. */
+.projets__avenir {
+  position: absolute;
+  right: 0;
+  bottom: 10%;
+  margin: 0;
+  padding: 12px;
+  font:
+    clamp(30px, 3.3vw, 48px) / 1 "Just Another Hand",
+    cursive;
+  text-align: center;
+}
+
+.projets__avenir span {
+  display: block;
+  margin-top: 6px;
+  font:
+    12px / 1.2 Liberation,
+    sans-serif;
+  text-transform: uppercase;
+}
+
+.projets__lien {
+  font:
+    clamp(30px, 3.3vw, 48px) / 1 "Just Another Hand",
+    cursive;
+  text-decoration: none;
+  width: fit-content;
+  padding: 12px;
+  transition:
+    transform 0.2s,
+    color 0.2s,
+    text-shadow 0.2s;
+  animation: projet-flotte 2.8s ease-in-out infinite alternate;
+}
+
+/* Mention discrète pour un projet qui est encore en préparation. */
+.projets__statut {
+  display: block;
+  margin-top: 6px;
+  font: 12px / 1.2 Liberation, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Chaque nom a un délai différent pour éviter qu'ils bougent tous ensemble. */
+.projets__lien:nth-child(2) {
+  animation-delay: -0.56s;
+}
+
+.projets__lien:nth-child(3) {
+  animation-delay: -1.12s;
+}
+
+.projets__lien:nth-child(4) {
+  animation-delay: -1.68s;
+}
+
+.projets__lien:nth-child(5) {
+  animation-delay: -2.24s;
+}
+
+.projets__lien:nth-child(even) {
+  justify-self: end;
+}
+
+/* Les trois derniers noms restent lisibles au-dessus du tracé SVG. */
+.projets__lien:nth-child(n + 4) {
+  position: relative;
+  z-index: 2;
+}
+
+.projets__avenir {
+  z-index: 2;
+}
+
+.interets__mot--vert,
+.projets__lien--vert {
+  --glow: #26a65b;
+}
+.interets__mot--mauve,
+.projets__lien--mauve {
+  --glow: #a34de0;
+}
+.interets__mot--rouge,
+.projets__lien--rouge {
+  --glow: #e63946;
+}
+.interets__mot--bleu,
+.projets__lien--bleu {
+  --glow: #3085ef;
+}
+.interets__mot--jaune,
+.projets__lien--jaune {
+  --glow: #d6aa00;
+}
+.interets__mot--rose,
+.projets__lien--rose {
+  --glow: #e754a6;
+}
+
+.projets__lien:is(:hover, :focus-visible) {
+  color: var(--glow);
+  text-shadow:
+    0 0 2px var(--glow),
+    0 0 1px var(--glow);
+  animation-play-state: paused;
+}
+
+@keyframes projet-flotte {
+  from {
+    transform: translateY(-7px) rotate(-2deg);
+  }
+  to {
+    transform: translateY(7px) rotate(2deg);
+  }
+}
+
+/* Contact */
+.contact {
+  position: relative;
+  margin: 0 0 140px 3.5%;
+  display: grid;
+  /* Le texte commence près du portrait, sans le recouvrir. */
+  grid-template-columns: 54% 46%;
+  padding-bottom: 90px;
+  align-items: end;
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 0;
+  bottom: 0;
+  height: 75%;
+  background: var(--gris-collage);
+}
+
+.contact__images {
+  position: relative;
+  padding-left: 20%;
+  margin: 0;
+}
+
+.contact__portrait {
+  width: 76%;
+  transform: translateX(25px);
+}
+
+.contact__voiture {
+  position: absolute;
+  width: 29%;
+  left: 0;
+  bottom: -30px;
+}
+
+.contact__contenu {
+  position: relative;
+  z-index: 1;
+  padding: 45px 50px 45px 35px;
+  /* Rapproche le titre et les liens du portrait. */
+  transform: translateX(-80px);
+  margin-top: 200px; /* Ajout pour descendre le texte */
+}
+
+.contact__texte {
+  max-width: 420px;
+  margin: 0 0 22px;
+  font-size: 15px;
+}
+
+/* Dans Contact, les photos arrivent de gauche et les écrits de droite. */
+.contact.accueil-section--anime {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.contact.accueil-section--anime .contact__images,
+.contact.accueil-section--anime .contact__contenu {
+  opacity: 0;
+  transition:
+    opacity 1.4s ease,
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact.accueil-section--anime .contact__images {
+  transform: translateX(-55px);
+}
+
+.contact.accueil-section--anime .contact__contenu {
+  transform: translateX(25px);
+  transition-delay: 0.5s;
+}
+
+.contact.accueil-section--anime.is-visible .contact__images {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contact.accueil-section--anime.is-visible .contact__contenu {
+  opacity: 1;
+  transform: translateX(-80px);
+}
+
+.contact h2 {
+  font-size: 38px;
+  margin-bottom: 22px;
+}
+
+.contact address {
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+/* Pied de page */
+.footer {
+  background: var(--gris-clair);
+  padding: 50px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  font-size: 12px;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer a {
+  font:
+    26px "Just Another Hand",
+    cursive;
+}
+/* Adaptation mobile */
+@media (max-width: 760px) {
+  .hero {
+    margin: 45px 0 85px;
+  }
+  .hero__illustration {
+    min-height: 470px;
+  }
+  .hero__personnage {
+    width: 45%;
+  }
+  .hero__personnage--haut-gauche {
+    /* Évite que le dessin touche la phrase du hero sur mobile. */
+    top: 11%;
+    left: 4%;
+    width: 35%;
+  }
+  .hero__personnage--haut-droite {
+    top: 2%;
+    right: 1%;
+  }
+  .hero__personnage--bas-gauche {
+    left: 0;
+  }
+  .hero__personnage--bas-droite {
+    right: 0;
+  }
+  .hero__texte {
+    top: 40%;
+    right: 2%;
+    width: 64%;
+    font-size: clamp(42px, 11vw, 62px);
+  }
+  .apropos {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 95px;
+    padding-top: 0;
+  }
+  .apropos__image {
+    order: 2;
+    width: 58%;
+    margin: 28px auto 0;
+  }
+  .apropos__image img {
+    height: auto;
+  }
+  .apropos__contenu {
+    order: 1;
+    margin: 0;
+  }
+  .apropos__header {
+    position: static;
+    width: 100%;
+    padding: 18px;
+  }
+  .apropos__header h2 {
+    font-size: clamp(24px, 5.5vw, 38px);
+    margin-bottom: 28px;
+  }
+  .apropos__header h1 {
+    font-size: 38px;
+  }
+  .apropos__texte {
+    padding: 25px 6% 0;
+  }
+  .apropos__details {
+    gap: 20px;
+    text-align: left;
+  }
+  .interets {
+    margin-bottom: 100px;
+  }
+  .interets h2 {
+    font-size: 36px;
+  }
+  .skills {
+    margin-bottom: 95px;
+  }
+  .skills h2 {
+    padding: 0;
+    text-align: right;
+  }
+  .skills__contenu {
+    height: 480px;
+  }
+  .skills__illustration {
+    left: 0;
+    top: 145px;
+    width: 48%;
+  }
+  .logiciel__icone {
+    width: 47px;
+    height: 47px;
+  }
+  .logiciel {
+    font-size: 10px;
+  }
+  .logiciel:nth-child(1) {
+    left: 17%;
+    top: 45px;
+  }
+  .logiciel:nth-child(2) {
+    left: 75%;
+    top: 400px;
+  }
+  .logiciel:nth-child(3) {
+    left: 58%;
+    top: 330px;
+  }
+  .logiciel:nth-child(4) {
+    right: 1%;
+    top: 80px;
+  }
+  .logiciel:nth-child(5) {
+    right: auto;
+    left: 5%;
+    top: -30px;
+  }
+  .logiciel:nth-child(6) {
+    right: 2%;
+    top: 260px;
+  }
+  .logiciel:nth-child(7) {
+    right: 32%;
+    top: 20px;
+  }
+  .logiciel:nth-child(8) {
+    right: 28%;
+    top: 170px;
+  }
+  .projets {
+    margin-bottom: 90px;
+  }
+  .projets__header {
+    height: 150px;
+    margin-left: 17%;
+  }
+  .projets__header h2 {
+    font-size: 36px;
+    padding: 0;
+  }
+  .projets__header p {
+    font-size: 30px;
+    bottom: -35px;
+    padding: 28px 8px;
+    width: 55%;
+  }
+  .projets__composition {
+    margin-top: 90px;
+    height: 570px;
+  }
+  /* Le tracé reste derrière les noms au lieu de les recouvrir. */
+  .projets__fil {
+    width: 82%;
+    height: 82%;
+    top: 9%;
+    left: 9%;
+  }
+  .projets__liste {
+    column-gap: 12%;
+  }
+  .projets__lien {
+    font-size: 30px;
+    padding: 6px;
+    max-width: 145px;
+  }
+  .projets__avenir {
+    right: 0;
+    bottom: 8%;
+    font-size: 30px;
+  }
+  .projets__apercu {
+    left: 38%;
+    width: 24%;
+  }
+
+  /* Mobile : les éléments avec survol sont remplacés par des cartes cliquables. */
+  .projets__composition {
+    display: none;
+  }
+
+  .projets__liste-mobile {
+    display: grid;
+    gap: 14px;
+    width: min(92%, 520px);
+    margin: 78px auto 0;
+  }
+
+  .projets__carte-mobile {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    align-items: center;
+    min-height: 118px;
+    overflow: hidden;
+    color: var(--couleur-texte);
+    background: var(--gris-clair);
+    text-decoration: none;
+  }
+
+  .projets__carte-mobile img,
+  .projets__carte-mobile-visuel {
+    width: 100%;
+    height: 118px;
+    object-fit: cover;
+  }
+
+  .projets__carte-mobile-visuel {
+    display: grid;
+    place-items: center;
+    padding: 12px;
+    background: var(--gris-collage);
+    color: var(--couleur-fond);
+    font: 26px / 1 "Just Another Hand", cursive;
+    text-align: center;
+  }
+
+  .projets__carte-mobile-titre {
+    padding: 18px;
+    font: clamp(29px, 9vw, 42px) / 0.95 "Just Another Hand", cursive;
+  }
+
+  .projets__carte-mobile:focus-visible {
+    outline: 3px solid var(--couleur-texte);
+    outline-offset: 4px;
+  }
+  .contact {
+    margin: 0 0 85px;
+    display: block;
+    padding: 0 0 25px;
+  }
+  .contact::before {
+    left: 15%;
+    height: 51%;
+  }
+  .contact__images {
+    padding: 0;
+    width: 72%;
+    margin-left: 19%;
+  }
+  .contact__voiture {
+    left: -26%;
+    width: 40%;
+    bottom: 5px;
+  }
+  .contact__contenu {
+    margin: 30px 0 0 20%;
+    padding: 35px 28px;
+    transform: none;
+  }
+  .contact.accueil-section--anime .contact__contenu {
+    transform: translateX(45px);
+  }
+  .contact.accueil-section--anime.is-visible .contact__contenu {
+    transform: translateX(0);
+  }
+  .contact h2 {
+    margin-bottom: 14px;
+  }
+  .contact address {
+    font-size: 14px;
+  }
+  .footer {
+    padding: 35px 6%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__illustration {
+    min-height: 420px;
+  }
+
+  .apropos__details {
+    grid-template-columns: 1fr;
+  }
+
+  .skills__contenu {
+    height: 440px;
+  }
+
+  .projets__carte-mobile,
+  .projets__carte-mobile img,
+  .projets__carte-mobile-visuel {
+    min-height: 100px;
+    height: 100px;
+  }
+}
+
+/* Une tablette verticale ou une petite fenêtre utilise aussi les cartes, sans toucher au desktop. */
+@media (min-width: 761px) and (max-width: 900px) {
+  .projets__composition {
+    display: none;
+  }
+
+  .projets__liste-mobile {
+    display: grid;
+    gap: 16px;
+    width: min(88%, 620px);
+    margin: 90px auto 0;
+  }
+
+  .projets__carte-mobile {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    align-items: center;
+    min-height: 145px;
+    overflow: hidden;
+    color: var(--couleur-texte);
+    background: var(--gris-clair);
+    text-decoration: none;
+  }
+
+  .projets__carte-mobile img,
+  .projets__carte-mobile-visuel {
+    width: 100%;
+    height: 145px;
+    object-fit: cover;
+  }
+
+  .projets__carte-mobile-visuel {
+    display: grid;
+    place-items: center;
+    padding: 12px;
+    background: var(--gris-collage);
+    color: var(--couleur-fond);
+    font: 30px / 1 "Just Another Hand", cursive;
+    text-align: center;
+  }
+
+  .projets__carte-mobile-titre {
+    padding: 22px;
+    font: clamp(34px, 6vw, 48px) / 0.95 "Just Another Hand", cursive;
+  }
+
+  .projets__carte-mobile:focus-visible {
+    outline: 3px solid var(--couleur-texte);
+    outline-offset: 4px;
+  }
+}
+
+/* Même composition, avec des proportions adaptées aux très grands écrans. */
+@media (min-width: 1800px) {
+  main {
+    max-width: 2000px;
+  }
+
+  .hero {
+    margin-bottom: 160px;
+  }
+
+  .hero__illustration {
+    min-height: 980px;
+  }
+
+  .hero__personnage {
+    width: min(30vw, 560px);
+  }
+
+  .hero__personnage--haut-gauche {
+    width: min(22vw, 400px);
+  }
+
+  .hero__texte {
+    width: min(60%, 1050px);
+    font-size: clamp(82px, 7vw, 150px);
+  }
+
+  .apropos {
+    margin-bottom: 160px;
+  }
+
+  .apropos__image img {
+    height: 820px;
+  }
+
+  .skills__contenu {
+    height: 610px;
+  }
+
+  .logiciel__icone {
+    width: 82px;
+    height: 82px;
+  }
+
+  .projets__header {
+    height: 280px;
+  }
+
+  .projets__composition {
+    height: 1000px;
+  }
+
+  .contact {
+    margin-bottom: 180px;
+  }
+}
+
+.projets__lien--beige { --glow: #94734f; color: #000; }
+.projets__lien--wee { --glow: #ad78ee; }
+
+
+/* Rapproche les projets du centre en laissant respirer les bords sur desktop. */
+@media (min-width: 901px) {
+ .projets__liste { padding-inline: 10%; column-gap: 17%; }
+}
+
+/* Trace plus compact au centre des projets. */
+@media (min-width: 901px) {
+ .projets__fil { width: 84%; height: 84%; left: 8%; top: 8%; }
+}
+
+/* Accueil : un aperçu partagé par un maximum de trois projets. */
+@media (min-width: 901px) {
+  #projets .projets__composition { height: auto; margin-inline: 8%; }
+  #projets .projets__liste { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: none; gap: clamp(32px, 5vw, 78px); padding: 0; }
+  .projets__groupe { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: clamp(20px, 5vw, 78px); }
+  .projets__groupe:nth-child(even) { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+  .projets__groupe:nth-child(even) .projets__apercu { order: -1; }
+  .projets__noms { display: grid; align-content: space-evenly; gap: 8px; }
+  .projets__groupe:nth-child(even) .projets__noms { justify-items: end; text-align: right; }
+  .projets__noms .projets__lien { justify-self: start; }
+  .projets__groupe:nth-child(even) .projets__lien { justify-self: end; }
+  .projets__noms .projets__statut { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .projets__a-venir { padding: 12px; font: 32px "Just Another Hand", cursive; }
+  .projets__groupe .projets__apercu { position: relative; inset: auto; width: 100%; height: clamp(205px, 22vw, 360px); }
+  .projets__groupe .projets__apercu-texte { inset: auto 0 0; padding: 12px 16px; text-align: left; color: white; background: rgb(0 0 0 / 72%); }
+  .projets__groupe:nth-child(even) .projets__apercu-texte { text-align: right; }
+  .projets__groupe .projets__apercu-texte:empty { display: none; }
+}

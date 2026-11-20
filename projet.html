@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <title>Projet | Yasmine Onekeo</title>
+
+    <!-- Cette feuille contient seulement le style des pages de détail. -->
+    <link rel="stylesheet" href="css/layoutProjets.css" />
+
+    <!-- data.js lit les projets; project.js remplit cette page avec le bon projet. -->
+    <script src="./js/data.js" defer></script>
+    <script src="./js/project.js" defer></script>
+    <link rel="stylesheet" href="./css/language.css" />
+    <script src="./js/language.js" defer></script>
+  </head>
+
+  <body>
+    <!-- HERO : titre, image de fond et bouton vidéo sont remplis par project.js. -->
+    <header class="projet-hero" id="accueil">
+      <p id="projet-message" role="status">Chargement du projet…</p>
+      <h1>Nom du projet</h1>
+
+      <!-- Le bouton est visible seulement si le projet possède une vidéo. -->
+      <button
+        type="button"
+        class="projet-hero__video"
+        id="projet-video"
+        aria-label="Voir la vidéo du projet"
+        hidden
+      >
+        <span aria-hidden="true">▶</span>
+      </button>
+    </header>
+
+    <!-- La vidéo reste sur le site dans cette fenêtre, puis s'arrête à la fermeture. -->
+    <dialog class="video-modal" id="video-modal" aria-label="Vidéo du projet">
+      <div class="video-modal__contenu">
+        <button
+          class="video-modal__fermer"
+          id="video-modal-fermer"
+          type="button"
+          aria-label="Fermer la vidéo"
+        >
+          ×
+        </button>
+        <iframe
+          id="video-modal-lecteur"
+          title="Vidéo du projet"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </dialog>
+
+    <main>
+      <!-- Présentation provisoire pour un projet qui n'a pas encore tous ses contenus. -->
+      <section class="projet-en-cours" id="projet-en-cours" hidden>
+        <div class="projet-en-cours__texte">
+          <p class="projet-en-cours__statut">Projet en cours · Travail d'équipe</p>
+          <h2>Un jeu de cartes à découvrir</h2>
+          <p id="projet-en-cours-description"></p>
+          <p>Les images et les détails du projet seront ajoutés au fil de sa création.</p>
+        </div>
+        <div class="projet-en-cours__visuel" aria-label="Visuel du projet à venir">
+          <span aria-hidden="true">✳</span>
+          <p>Visuel à venir</p>
+        </div>
+      </section>
+
+      <!-- PRÉSENTATION DU PROJET -->
+      <section class="projet-presentation">
+        <h2>Présentation du projet</h2>
+
+        <div class="presentation-contenu">
+          <div class="presentation-image">
+            <img alt="Présentation du projet" />
+
+            <div class="presentation-image__texte">
+              <h3>Description</h3>
+              <p>
+                Description du projet. Présente ici le concept, l'objectif et le
+                contexte dans lequel le projet a été réalisé.
+              </p>
+            </div>
+          </div>
+
+          <div class="presentation-description">
+            <img alt="Deuxième aperçu du projet" />
+
+            <p><strong>Rôle</strong><span id="projet-role"></span></p>
+            <p><strong>Logiciels</strong><span id="projet-logiciels"></span></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Palette : les cinq cercles et leurs codes sont remplis depuis le JSON. -->
+      <section class="projet-palette">
+        <h2>Palette de couleurs</h2>
+
+        <div class="palette-couleurs">
+          <div class="couleur">
+            <div class="couleur-apercu couleur-1"></div>
+            <p></p>
+          </div>
+
+          <div class="couleur">
+            <div class="couleur-apercu couleur-2"></div>
+            <p></p>
+          </div>
+
+          <div class="couleur">
+            <div class="couleur-apercu couleur-3"></div>
+            <p></p>
+          </div>
+
+          <div class="couleur">
+            <div class="couleur-apercu couleur-4"></div>
+            <p></p>
+          </div>
+
+          <div class="couleur">
+            <div class="couleur-apercu couleur-5"></div>
+            <p></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Détails : texte du processus et images de galerie sont ajoutés par JavaScript. -->
+      <section class="projet-details">
+        <div class="details-description">
+          <h2>Processus</h2>
+
+          <p>
+            Description du processus de création du projet. Cette section peut
+            servir à expliquer les recherches, les expérimentations et les
+            décisions prises pendant la réalisation.
+          </p>
+        </div>
+
+        <div class="details-galerie">
+          <figure class="image-principale">
+            <img alt="Détail principal du projet" />
+          </figure>
+
+          <figure>
+            <img alt="Détail du projet" />
+          </figure>
+
+          <figure>
+            <img alt="Détail du projet" />
+          </figure>
+
+          <figure>
+            <img alt="Détail du projet" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- Les étapes et logiciels sont ajoutés depuis projects.json. -->
+      <section class="processus-logiciels" id="processus-logiciels" hidden>
+        <div class="processus-logiciels__texte">
+          <h2 id="processus-logiciels-titre">Étapes et logiciels</h2>
+          <p id="processus-logiciels-description"></p>
+          <ul class="processus-logiciels__liste" id="processus-logiciels-liste"></ul>
+        </div>
+        <div class="processus-logiciels__images" id="processus-logiciels-images"></div>
+      </section>
+
+      <!-- Galerie : le carrousel permet de changer l'image principale. -->
+      <section class="autres-projets">
+        <h2>Galerie Photo</h2>
+
+        <div class="autres-projets-contenu">
+          <div class="autres-projets-description">
+            <h3>Catégorie</h3>
+
+            <p>
+              Description d'un autre aspect du projet ou présentation d'une
+              autre réalisation reliée.
+            </p>
+          </div>
+
+        <!-- Les boutons déplacent l'image du carrousel vers la gauche ou la droite. -->
+          <div class="carrousel-projets">
+            <button
+              class="carrousel-precedent"
+              type="button"
+              aria-label="Image précédente"
+            >
+              &#10094;
+            </button>
+
+            <div class="carrousel-image">
+              <img alt="Aperçu du projet" />
+            </div>
+
+            <button
+              class="carrousel-suivant"
+              type="button"
+              aria-label="Image suivante"
+            >
+              &#10095;
+            </button>
+          </div>
+        </div>
+
+        <!-- Les trois miniatures sont créées par JavaScript. -->
+        <div class="carrousel-miniatures">
+          <button type="button">
+            <img alt="Voir l'image 1" />
+          </button>
+
+          <button type="button">
+            <img alt="Voir l'image 2" />
+          </button>
+
+          <button type="button">
+            <img alt="Voir l'image 3" />
+          </button>
+        </div>
+
+        <!-- Les informations sont remplies depuis projects.json. -->
+        <div class="credits">
+          <h2>Crédits et remerciements</h2>
+          <p id="projet-credits"></p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Lien simple pour revenir à la page d'accueil du portfolio. -->
+    <div class="retour-accueil-bas">
+      <a class="retour-accueil" href="./index.html">← Retour à l'accueil</a>
+    </div>
+
+    <!-- Pied de page commun à toutes les pages de projet. -->
+    <footer class="footer">
+      <p>© 2026 Yasmine Onekeo · Création multimédia</p>
+      <a href="#accueil">Retour en haut ↑</a>
+    </footer>
+  </body>
+</html>

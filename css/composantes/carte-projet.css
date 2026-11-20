@@ -1,0 +1,13 @@
+/*
+  Carte réutilisable pour les pages de projets.
+  Ce style est prêt si le site utilise plus tard des cartes rectangulaires.
+*/
+.carte-projet {
+  border-radius: 10px;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 15px;
+  background-color: #ffffff;
+  transition: transform 0.2s;
+}

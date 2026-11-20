@@ -1,0 +1,105 @@
+/* La barre de navigation est en haut sur petit écran. */
+.header {
+  max-width: 1440px;
+  margin: auto;
+  padding: 22px 4%;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.navigation__logo {
+  font: 32px "Just Another Hand", cursive;
+  text-decoration: none;
+}
+
+.navigation__liste {
+  list-style: none;
+  display: flex;
+  gap: clamp(16px, 3vw, 44px);
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+
+.navigation__liste a {
+  text-decoration: none;
+}
+
+.navigation__liste a:hover {
+  text-decoration: underline;
+}
+
+/* Navigation à gauche sur ordi */
+@media (min-width: 761px) and (min-height: 481px) {
+  body {
+    padding-left: 80px;
+  }
+
+  .header {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 5;
+    width: 80px;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    background: var(--couleur-fond);
+    border-right: 1px solid var(--gris-clair);
+  }
+
+  .navigation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100dvh - 64px);
+    transform: translate(-50%, -50%) rotate(-90deg);
+  }
+
+  .navigation__logo,
+  .navigation__liste a {
+    white-space: nowrap;
+  }
+
+  .navigation__liste {
+    gap: clamp(18px, 4vh, 44px);
+  }
+}
+
+/* Sur téléphone, les liens passent sous le nom pour garder de l'espace. */
+@media (max-width: 420px) {
+  .navigation {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .navigation__logo {
+    max-width: none;
+    font-size: 28px;
+  }
+  .navigation__liste {
+    flex: 0 0 100%;
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
+  }
+}
+
+/* Agrandit la nav pour les grands écrans */
+@media (min-width: 1800px) {
+  .header {
+    max-width: 2000px;
+  }
+
+  .navigation__logo {
+    font-size: 40px;
+  }
+
+  .navigation__liste {
+    font-size: 16px;
+  }
+}
